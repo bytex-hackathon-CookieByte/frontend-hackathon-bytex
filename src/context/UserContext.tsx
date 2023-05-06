@@ -1,11 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 type noop = () => void;
 
 type UserContextType = {
   isLoggedIn: boolean;
+  id: string;
   username: string;
+  email: string;
   firstName: string;
   lastName: string;
   avatar: string;
@@ -16,7 +19,9 @@ type UserContextType = {
 
 const defaultState: UserContextType = {
   isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+  id: "",
   username: "",
+  email: "",
   firstName: "",
   lastName: "",
   avatar: "",
@@ -33,17 +38,34 @@ function UserContextProvider({
   children: JSX.Element | JSX.Element[];
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(defaultState.isLoggedIn);
+  const [id, setId] = useState(defaultState.id);
   const [username, setUsername] = useState(defaultState.username);
   const [firstName, setFirstname] = useState(defaultState.firstName);
   const [lastName, setLastName] = useState(defaultState.lastName);
+  const [email, setEmail] = useState(defaultState.email);
   const [avatar, setAvatar] = useState(defaultState.avatar);
   const [tokens, setTokens] = useState(defaultState.tokens);
 
   const login = (username: string, password: string, toHome: noop) => {
-    console.log({ username, password });
-    //on success
-    setIsLoggedIn(true);
-    toHome();
+    axios
+      .post("http://localhost:8080/login", { username, password })
+      .then((res) => {
+        console.log(res.data);
+        setIsLoggedIn(true);
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        setUsername(res.data.username);
+        setEmail(res.data.email);
+        setAvatar(res.data.avatar);
+        setId(res.data.id);
+        setFirstname(res.data.firstName);
+        setLastName(res.data.lastName);
+        setTokens(res.data.tokens);
+        toHome();
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data || err.message);
+      });
   };
 
   const logout = () => {
@@ -60,7 +82,9 @@ function UserContextProvider({
     <UserContext.Provider
       value={{
         isLoggedIn,
+        id,
         username,
+        email,
         firstName,
         lastName,
         avatar,

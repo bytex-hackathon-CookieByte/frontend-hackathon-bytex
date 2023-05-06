@@ -27,7 +27,7 @@ function Course({ title, content, prize }: CourseType) {
           }
           actions={[
             <div>
-              Prize: {prize}
+              Prize: {prize || 0}
               <FontAwesomeIcon icon={faCoins} className={"ml-1"} />
             </div>,
             <Button onClick={() => setIsOpen(true)}>Open</Button>,

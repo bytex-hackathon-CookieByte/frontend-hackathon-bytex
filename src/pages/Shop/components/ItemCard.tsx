@@ -10,16 +10,24 @@ export type ItemCardProps = {
   price: number;
   type: "avatar" | "review" | "course";
   onBuy: () => void;
+  companyTitle?: string;
 };
 
-function ItemCard({ title, image, price, type, onBuy }: ItemCardProps) {
+function ItemCard({
+  title,
+  image,
+  price,
+  type,
+  onBuy,
+  companyTitle,
+}: ItemCardProps) {
   const getType = () => {
     if (type === "avatar") {
       return "User Avatar";
     } else if (type === "review") {
       return "Other users can review your profile";
     } else if (type === "course") {
-      return "Course";
+      return `Course by ${companyTitle}`;
     }
     return "Item";
   };
@@ -41,7 +49,12 @@ function ItemCard({ title, image, price, type, onBuy }: ItemCardProps) {
           <Button onClick={onBuy}>Buy</Button>,
         ]}
       >
-        <Meta title={title} description={getType()} />
+        <Meta
+          title={title}
+          description={
+            <div className={"max-w-[13rem] truncate"}>{getType()}</div>
+          }
+        />
       </Card>
     </Col>
   );

@@ -18,7 +18,6 @@ function Login() {
   };
 
   const onFinish = (values: any) => {
-    console.log("Success:", values);
     login(values.username, values.password, () => navigate("/home"));
   };
 

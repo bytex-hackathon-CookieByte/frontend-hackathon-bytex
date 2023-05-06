@@ -12,7 +12,7 @@ type UserCardProps = {
 
 function UserCard({ isCollapsed, className }: UserCardProps) {
   const { username, avatar, tokens } = useContext(UserContext);
-
+  console.log(username);
   return (
     <div className={`${className}`}>
       <div className={!isCollapsed ? "flex items-center align-top" : ""}>

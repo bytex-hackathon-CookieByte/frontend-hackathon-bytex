@@ -5,10 +5,14 @@ import { Layout } from "antd";
 import { UserContext } from "../../context/UserContext";
 
 function LoginProtected() {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, login } = useContext(UserContext);
   if (!isLoggedIn) {
     // user is not authenticated
     return <Navigate to="/login" />;
+  } else {
+    const username = localStorage.getItem("username");
+    const password = localStorage.getItem("password");
+    login(username || "", password || "", () => {});
   }
   return (
     <Layout className={"min-h-screen"}>

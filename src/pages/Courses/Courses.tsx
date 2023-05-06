@@ -1,32 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Course, { CourseType } from "./components/Course";
 import { Row } from "antd";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const courses: CourseType[] = [
-  // {
-  //   title: "React",
-  //   content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
-  //   price: 200,
-  //   prize: 100,
-  // },
-  // {
-  //   title: "Node.js",
-  //   content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
-  //   price: 300,
-  //   prize: 200,
-  // },
-  // {
-  //   title: "Springboot",
-  //   content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
-  //   price: 200,
-  //   prize: 100,
-  // },
-];
+// const courses: CourseType[] = [
+//   {
+//     title: "React",
+//     content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
+//     price: 200,
+//     prize: 100,
+//   },
+//   {
+//     title: "Node.js",
+//     content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
+//     price: 300,
+//     prize: 200,
+//   },
+//   {
+//     title: "Springboot",
+//     content: "Bdlisabdfiuabsfuioewbifubeiab weufeiubfiu;awe fubeiqufbea",
+//     price: 200,
+//     prize: 100,
+//   },
+// ];
 
 function Courses() {
+  const [courses, setCourses] = useState<CourseType[]>([]);
+
+  const getCourses = () => {
+    axios({
+      url: "http://localhost:8080/courses",
+      method: "GET",
+    })
+      .then((res) => {
+        setCourses(res.data);
+        console.log("courses: ", res.data);
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
+  useEffect(() => getCourses(), []);
+
   return (
     <div className={"w-100 h-100 flex-1 pb-10"}>
       {courses.length ? (
@@ -35,8 +53,8 @@ function Courses() {
           justify={"center"}
           className={"max-w-full"}
         >
-          {courses.map((course) => (
-            <Course {...course} />
+          {courses.map((course, i) => (
+            <Course {...course} key={i} />
           ))}
         </Row>
       ) : (
