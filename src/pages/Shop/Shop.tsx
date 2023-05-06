@@ -1,5 +1,5 @@
 import React from "react";
-import ItemCard from "./components/ItemCard";
+import ItemCard, { ItemCardProps } from "./components/ItemCard";
 import leprechaun from "../../images/Avatars/leprechaun.png";
 import man from "../../images/Avatars/man.png";
 import maya from "../../images/Avatars/maya.png";
@@ -11,80 +11,96 @@ import checkmark from "../../images/checkmark.png";
 import course from "../../images/course.png";
 import { Row } from "antd";
 
+const review: ItemCardProps = {
+  title: "Profile Review",
+  type: "review",
+  image: checkmark,
+  price: 10000,
+  onBuy: () => {},
+};
+
+const avatars: ItemCardProps[] = [
+  {
+    title: "Leprechaun",
+    type: "avatar",
+    image: leprechaun,
+    price: 100,
+    onBuy: () => {},
+  },
+  {
+    title: "Man",
+    type: "avatar",
+    image: man,
+    price: 200,
+    onBuy: () => {},
+  },
+  {
+    title: "Maya",
+    type: "avatar",
+    image: maya,
+    price: 500,
+    onBuy: () => {},
+  },
+  {
+    title: "Maya 2",
+    type: "avatar",
+    image: maya2,
+    price: 1000,
+    onBuy: () => {},
+  },
+  {
+    title: "Maya 3",
+    type: "avatar",
+    image: maya3,
+    price: 2000,
+    onBuy: () => {},
+  },
+  {
+    title: "Maya4",
+    type: "avatar",
+    image: maya4,
+    price: 5000,
+    onBuy: () => {},
+  },
+  {
+    title: "Woman",
+    type: "avatar",
+    image: woman,
+    price: 10000,
+    onBuy: () => {},
+  },
+];
+
+const courses: ItemCardProps[] = [
+  {
+    title: "React for begginers",
+    type: "course",
+    image: course,
+    price: 5000,
+    onBuy: () => {},
+  },
+  {
+    title: "Springboot introduction",
+    type: "course",
+    image: course,
+    price: 5000,
+    onBuy: () => {},
+  },
+];
+
 function Shop() {
   return (
-    <div className={"w-100"}>
+    <div className={"w-100 pb-10"}>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify={"center"}>
-        <ItemCard
-          title={"Profile Review"}
-          type={"review"}
-          image={checkmark}
-          price={500}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Leprechaun"}
-          image={leprechaun}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Man"}
-          image={man}
-          price={200}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Leprechaun"}
-          image={maya}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Leprechaun"}
-          image={maya2}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />{" "}
-        <ItemCard
-          title={"Leprechaun"}
-          image={maya3}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />{" "}
-        <ItemCard
-          title={"Leprechaun"}
-          image={maya4}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Leprechaun"}
-          image={woman}
-          price={100}
-          type={"avatar"}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"Profile Review"}
-          type={"review"}
-          image={checkmark}
-          price={200}
-          onBuy={() => console.log("buy")}
-        />
-        <ItemCard
-          title={"React Course"}
-          type={"course"}
-          image={course}
-          price={500}
-          onBuy={() => console.log("buy")}
-        />
+        {[review, ...avatars, ...courses].map((item) => (
+          <ItemCard
+            title={item.title}
+            image={item.image}
+            price={item.price}
+            type={item.type}
+            onBuy={item.onBuy}
+          />
+        ))}
       </Row>
     </div>
   );

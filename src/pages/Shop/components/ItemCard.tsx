@@ -4,7 +4,7 @@ import Meta from "antd/es/card/Meta";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 
-type ItemCardProps = {
+export type ItemCardProps = {
   title: string;
   image: string;
   price: number;
