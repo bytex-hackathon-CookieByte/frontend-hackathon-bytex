@@ -1,13 +1,11 @@
 import React from "react";
-import "./App.css";
-import { Button } from "antd";
-import { toast } from "react-toastify";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./services/router";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Button onClick={() => toast.success("Hello")}>Click me</Button>
+    <div className={"min-h-screen"}>
+      <RouterProvider router={router} />
     </div>
   );
 }
