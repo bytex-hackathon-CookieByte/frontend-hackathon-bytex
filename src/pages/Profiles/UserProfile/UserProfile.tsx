@@ -4,17 +4,19 @@ import UserInfo from "../components/UserInfoCard";
 import Badges from "../components/BadgesCard";
 import SkillsCard from "../components/SkillsCard";
 import ChallengesCard from "../components/ChallengesCard";
+import { Row } from "antd";
+
 function UserProfile() {
   const { userId } = useParams();
 
   return (
-    <div className="w-screen h-screen">
-      <div className="grid grid-cols-2 col-span-1">
+    <div >
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify={"center"}>
         <UserInfo userId={userId} />
         <Badges />
         <ChallengesCard />
         <SkillsCard />
-      </div>
+      </Row>
     </div>
   );
 }
