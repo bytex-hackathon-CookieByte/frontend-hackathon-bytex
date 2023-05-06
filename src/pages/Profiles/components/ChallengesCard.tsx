@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import trophy from "../../../images/trophy.png";
 
-export default function ChallangesCard() {
+export default function ChallengesCard() {
   return (
     <div className="flex jusitfy-center items-center flex-row p-10 bg-gray-50 rounded shadow-xl m-4 w-[40rem]">
       <div className="flex jusitfy-center items-center flex-col w-[15rem]">
