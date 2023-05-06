@@ -3,7 +3,7 @@ import { Button, Form, Input, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [value, setValue] = useState();
   const onFinish = (values: any) => {
     console.log("Success:", values);
@@ -136,4 +136,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
