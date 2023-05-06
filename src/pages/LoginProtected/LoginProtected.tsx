@@ -6,7 +6,6 @@ import { UserContext } from "../../context/UserContext";
 
 function LoginProtected() {
   const { isLoggedIn } = useContext(UserContext);
-  console.log({ isLoggedIn });
   if (!isLoggedIn) {
     // user is not authenticated
     return <Navigate to="/login" />;

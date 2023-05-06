@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Sider from "antd/es/layout/Sider";
 import { Divider, Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 import logo from "../../images/Logo.png";
 import croppedLogo from "../../images/LogoCropped.png";
 import UserCard from "./UserCard";
+import { UserContext } from "../../context/UserContext";
 
 function Navbar() {
+  const { username } = useContext(UserContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -43,7 +45,7 @@ function Navbar() {
           </Menu.Item>
           <Divider />
           <Menu.Item>
-            <Link to={`/profile/user/${"dsa"}`}>
+            <Link to={`/profile/user/${username}`}>
               <UserCard isCollapsed={isCollapsed} />
             </Link>
           </Menu.Item>

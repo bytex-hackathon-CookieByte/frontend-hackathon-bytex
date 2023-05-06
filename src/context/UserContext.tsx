@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type noop = () => void;
@@ -14,7 +14,7 @@ type UserContextType = {
 };
 
 const defaultState: UserContextType = {
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
   username: "",
   firstName: "",
   lastName: "",
@@ -40,13 +40,18 @@ function UserContextProvider({
     console.log({ username, password });
     //on success
     setIsLoggedIn(true);
-    toast("Logged out!");
     toHome();
   };
 
   const logout = () => {
     setIsLoggedIn(false);
+    toast.success("Logged out!");
   };
+
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn ? "true" : "false");
+    console.log({ isLoggedIn, username });
+  }, [isLoggedIn]);
 
   return (
     <UserContext.Provider
