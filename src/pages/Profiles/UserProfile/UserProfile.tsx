@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import UserInfo from "../components/UserInfo";
-import Badges from "../components/Badges";
-import ChallangesCard from "../components/ChallangesCard";
+import UserInfo from "../components/UserInfoCard";
+import Badges from "../components/BadgesCard";
+import ChallangesCard from "../components/ChallengesCard";
 import SkillsCard from "../components/SkillsCard";
 function UserProfile() {
   const { userId } = useParams();

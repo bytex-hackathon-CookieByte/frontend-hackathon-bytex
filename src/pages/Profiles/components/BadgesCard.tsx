@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import badge1 from "../../../images/badges/badge-1.png";
+import badge1 from "../../../images/Badges/badge-1.png";
 
 export default function Badges() {
   return (
