@@ -10,6 +10,7 @@ import UserProfile from "../pages/Profiles/UserProfile/UserProfile";
 import CompanyProfile from "../pages/Profiles/CompanyProfile/CompanyProfile";
 import Shop from "../pages/Shop/Shop";
 import MyChallenges from "../pages/MyChallenges/MyChallenges";
+import Courses from "../pages/Courses/Courses";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
       },
     ],
   },

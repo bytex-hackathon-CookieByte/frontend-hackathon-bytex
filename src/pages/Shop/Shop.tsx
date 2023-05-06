@@ -91,7 +91,11 @@ const courses: ItemCardProps[] = [
 function Shop() {
   return (
     <div className={"w-100 pb-10"}>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify={"center"}>
+      <Row
+        gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+        justify={"center"}
+        className={"max-w-full"}
+      >
         {[review, ...avatars, ...courses].map((item) => (
           <ItemCard
             title={item.title}

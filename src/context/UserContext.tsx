@@ -9,6 +9,7 @@ type UserContextType = {
   firstName: string;
   lastName: string;
   avatar: string;
+  tokens: number;
   login: (username: string, password: string, toLogin: noop) => void;
   logout: noop;
 };
@@ -19,6 +20,7 @@ const defaultState: UserContextType = {
   firstName: "",
   lastName: "",
   avatar: "",
+  tokens: 500,
   login: () => {},
   logout: () => {},
 };
@@ -35,6 +37,7 @@ function UserContextProvider({
   const [firstName, setFirstname] = useState(defaultState.firstName);
   const [lastName, setLastName] = useState(defaultState.lastName);
   const [avatar, setAvatar] = useState(defaultState.avatar);
+  const [tokens, setTokens] = useState(defaultState.tokens);
 
   const login = (username: string, password: string, toHome: noop) => {
     console.log({ username, password });
@@ -61,6 +64,7 @@ function UserContextProvider({
         firstName,
         lastName,
         avatar,
+        tokens,
         login,
         logout,
       }}
