@@ -4,6 +4,7 @@ import { Divider, Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBriefcase,
+  faGraduationCap,
   faMedal,
   faSackDollar,
 } from "@fortawesome/free-solid-svg-icons";
@@ -49,6 +50,9 @@ function Navbar() {
           </Menu.Item>
           <Menu.Item icon={<FontAwesomeIcon icon={faSackDollar} />}>
             <Link to={"/shop"}>Shop</Link>
+          </Menu.Item>
+          <Menu.Item icon={<FontAwesomeIcon icon={faGraduationCap} />}>
+            <Link to={"/courses"}>Courses</Link>
           </Menu.Item>
           <Divider />
           <Menu.Item>
