@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import UserInfo from "../components/UserInfo";
-import Badges from "../components/Badges";
-import ChallangesCard from "../components/ChallangesCard";
+import UserInfo from "../components/UserInfoCard";
+import Badges from "../components/BadgesCard";
 import SkillsCard from "../components/SkillsCard";
+import ChallengesCard from "../components/ChallengesCard";
 function UserProfile() {
   const { userId } = useParams();
 
@@ -12,7 +12,7 @@ function UserProfile() {
       <div className="grid grid-cols-2 col-span-1">
         <UserInfo userId={userId} />
         <Badges />
-        <ChallangesCard />
+        <ChallengesCard />
         <SkillsCard />
       </div>
     </div>
