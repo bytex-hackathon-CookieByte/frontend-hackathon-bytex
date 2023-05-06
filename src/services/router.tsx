@@ -11,6 +11,7 @@ import CompanyProfile from "../pages/Profiles/CompanyProfile/CompanyProfile";
 import Shop from "../pages/Shop/Shop";
 import MyChallenges from "../pages/MyChallenges/MyChallenges";
 import Courses from "../pages/Courses/Courses";
+import CompanyChallenges from "../pages/Challenges/CompanyChallenges";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/challenges",
-        element: <Challenges />,
+        element: <CompanyChallenges />,
       },
       {
         path: "/my-challenges",
