@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Button, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 function Login() {
-  const [username, setUsername] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
+  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -16,6 +19,7 @@ function Login() {
 
   const onFinish = (values: any) => {
     console.log("Success:", values);
+    login(values.username, values.password, () => navigate("/home"));
   };
 
   const onFinishFailed = (errorInfo: any) => {

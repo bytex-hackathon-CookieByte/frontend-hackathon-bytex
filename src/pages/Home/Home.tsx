@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
-import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../context/UserContext";
 
 function Home() {
+  const { logout } = useContext(UserContext);
   return (
     <div className="text-center">
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Button onClick={() => toast.success("Hello")}>
+      <Button onClick={() => logout()}>
         <FontAwesomeIcon icon={faHouse} className={"mr-1"} />
-        Click me
+        Logout
       </Button>
     </div>
   );

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { Layout } from "antd";
+import { UserContext } from "../../context/UserContext";
 
 function LoginProtected() {
-  const isLoggedIn = true; //this should be changed with a proper way of checking if a user is logged in (bafta George)
+  const { isLoggedIn } = useContext(UserContext);
+  console.log({ isLoggedIn });
   if (!isLoggedIn) {
     // user is not authenticated
     return <Navigate to="/login" />;
