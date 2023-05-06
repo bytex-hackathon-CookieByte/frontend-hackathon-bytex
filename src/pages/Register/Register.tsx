@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 function Register() {
   const [value, setValue] = useState();
+  const [username, setUsername] = useState<String>("");
+  const [password, setPassword] = useState<String>("");
+  const [confirmPassword, setConfirmPassword] = useState<String>("");
+  const [firstName, setFirstName] = useState<String>("");
+  const [lastName, setLastName] = useState<String>("");
+  const [companyName, setCompanyName] = useState<String>("");
+  const [phoneNumber, setPhoneNumber] = useState<String>("");
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -14,8 +22,53 @@ function Register() {
   };
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", value);
     setValue(e.target.value);
+  };
+
+  const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const onChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const onChangeFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstName(e.target.value);
+  };
+
+  const onChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(e.target.value);
+  };
+
+  const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCompanyName(e.target.value);
+  };
+
+  const onChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const RegisterMe = () => {
+    if (password === confirmPassword) {
+      const RegisterOject = {
+        type: value,
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword,
+        firstName: firstName,
+        lastName: lastName,
+        companyName: companyName,
+        phoneNumber: phoneNumber,
+      };
+      console.log(RegisterOject);
+    } else {
+      console.log("Passwords don't match");
+    }
   };
 
   return (
@@ -40,7 +93,7 @@ function Register() {
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input />
+          <Input onChange={onChangeUsername} />
         </Form.Item>
 
         <Form.Item
@@ -48,21 +101,21 @@ function Register() {
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password />
+          <Input.Password onChange={onChangePassword} />
         </Form.Item>
         <Form.Item
           label="Confirm Password"
-          name="password"
+          name="Confirm Password"
           rules={[
             { required: true, message: "Please input password confirmation!" },
           ]}
         >
-          <Input.Password />
+          <Input.Password onChange={onChangeConfirmPassword} />
         </Form.Item>
         <Form.Item label="Role">
           <Radio.Group onChange={onChange} value={value}>
-            <Radio value="Employee"> Employee </Radio>
-            <Radio value="Company"> Company </Radio>
+            <Radio value="Employee">Employee</Radio>
+            <Radio value="Company">Company</Radio>
           </Radio.Group>
         </Form.Item>
         <Form.Item>
@@ -78,7 +131,7 @@ function Register() {
                 { required: true, message: "Please input your first name!" },
               ]}
             >
-              <Input />
+              <Input onChange={onChangeFirstName} />
             </Form.Item>
             <Form.Item
               label="Last Name"
@@ -87,7 +140,7 @@ function Register() {
                 { required: true, message: "Please input your last name!" },
               ]}
             >
-              <Input />
+              <Input onChange={onChangeLastName} />
             </Form.Item>
             <Form.Item
               label="Phone Number"
@@ -96,7 +149,7 @@ function Register() {
                 { required: true, message: "Please input your phone number!" },
               ]}
             >
-              <Input />
+              <Input type="phone" onChange={onChangePhoneNumber} />
             </Form.Item>
           </>
         )}
@@ -109,7 +162,7 @@ function Register() {
                 { required: true, message: "Please input your company name!" },
               ]}
             >
-              <Input />
+              <Input onChange={onChangeCompanyName} />
             </Form.Item>
             <Form.Item
               label="Phone Number"
@@ -118,13 +171,13 @@ function Register() {
                 { required: true, message: "Please input your phone number!" },
               ]}
             >
-              <Input />
+              <Input onChange={onChangePhoneNumber} />
             </Form.Item>
           </>
         )}
 
         <div className="flex flex-row">
-          <Button className="flex mb-8 mx-2">
+          <Button className="flex mb-8 mx-2" onClick={RegisterMe}>
             <Link to="/home">Register</Link>
           </Button>
           <Button className="flex mb-8">

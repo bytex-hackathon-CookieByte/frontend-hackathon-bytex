@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [username, setUsername] = useState<String>("");
+  const [password, setPassword] = useState<String>("");
+
+  const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const LogMe = () => {
+    const LogObject = {
+      username: username,
+      password: password,
+    };
+    console.log(LogObject);
   };
 
   return (
@@ -35,7 +54,7 @@ function Login() {
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input />
+          <Input onChange={onChangeUsername} />
         </Form.Item>
 
         <Form.Item
@@ -43,7 +62,7 @@ function Login() {
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password />
+          <Input.Password onChange={onChangePassword} />
         </Form.Item>
 
         {/* <Form.Item
@@ -57,7 +76,7 @@ function Login() {
           <Button htmlType="submit" className="mx-2">
             Login
           </Button>
-          <Button>
+          <Button onClick={LogMe}>
             <Link to="/register">Register</Link>
           </Button>
         </Form.Item>
