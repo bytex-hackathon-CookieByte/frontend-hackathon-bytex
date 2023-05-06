@@ -13,7 +13,9 @@ function LoginProtected() {
   return (
     <Layout className={"min-h-screen"}>
       <Navbar />
-      <Outlet />
+      <Layout>
+        <Outlet />
+      </Layout>
     </Layout>
   );
 }

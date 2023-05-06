@@ -20,19 +20,26 @@ function Navbar() {
   return (
     <>
       <Sider
-        collapsible
+        collapsible={true}
         collapsed={isCollapsed}
         onCollapse={(val) => setIsCollapsed(val)}
         theme={"light"}
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "sticky",
+          top: 0,
+          left: 0,
+        }}
       >
-        <Link to={"/"}>
-          {isCollapsed ? (
-            <img src={croppedLogo} className={"p-[1rem]"} />
-          ) : (
-            <img src={logo} className={"p-[2rem]"} />
-          )}
-        </Link>
         <Menu className={"h-full"}>
+          <Link to={"/home"}>
+            {isCollapsed ? (
+              <img src={croppedLogo} className={"p-[1rem]"} />
+            ) : (
+              <img src={logo} className={"p-[2rem]"} />
+            )}
+          </Link>
           <Divider />
           <Menu.Item icon={<FontAwesomeIcon icon={faBriefcase} />}>
             <Link to={"/challenges"}>Challenges</Link>
