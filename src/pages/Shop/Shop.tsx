@@ -16,14 +16,11 @@ import { UserContext } from "../../context/UserContext";
 
 const buyItem = (username: string, tokens: number) => {
   console.log({ username, tokens });
-  axios({
-    url: "http://localhost:8080/users/tokens/substract",
-    method: "GET",
-    headers: {
-      username: username,
-      tokens: tokens,
-    },
-  })
+  axios
+    .post("http://localhost:8080/users/tokens/add", {
+      username,
+      tokens,
+    })
     .then((res) => {
       console.log(res.data);
     })

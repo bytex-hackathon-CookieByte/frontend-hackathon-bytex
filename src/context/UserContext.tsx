@@ -7,6 +7,7 @@ type noop = () => void;
 type UserContextType = {
   isLoggedIn: boolean;
   id: string;
+  type: string;
   username: string;
   email: string;
   firstName: string;
@@ -20,6 +21,7 @@ type UserContextType = {
 const defaultState: UserContextType = {
   isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
   id: "",
+  type: "",
   username: "",
   email: "",
   firstName: "",
@@ -39,6 +41,7 @@ function UserContextProvider({
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(defaultState.isLoggedIn);
   const [id, setId] = useState(defaultState.id);
+  const [type, setType] = useState(defaultState.type);
   const [username, setUsername] = useState(defaultState.username);
   const [firstName, setFirstname] = useState(defaultState.firstName);
   const [lastName, setLastName] = useState(defaultState.lastName);
@@ -83,6 +86,7 @@ function UserContextProvider({
       value={{
         isLoggedIn,
         id,
+        type,
         username,
         email,
         firstName,
