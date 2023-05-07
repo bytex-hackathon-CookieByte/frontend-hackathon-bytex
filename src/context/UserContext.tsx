@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { availableAvatars } from "../images/Avatars/avatars";
 
 type noop = () => void;
 
@@ -17,6 +18,10 @@ type UserContextType = {
   login: (username: string, password: string, toLogin: noop) => void;
   logout: noop;
   setTokens: (val: number) => void;
+  getSelectedAvatar: () => string;
+  getOwnedAvatars: () => string[];
+  addAvatar: (val: string) => string;
+  setAvatar: (val: string) => void;
 };
 
 const defaultState: UserContextType = {
@@ -32,6 +37,10 @@ const defaultState: UserContextType = {
   login: () => {},
   logout: () => {},
   setTokens: () => {},
+  getSelectedAvatar: () => `[${availableAvatars[0]}]`,
+  getOwnedAvatars: () => [availableAvatars[0]],
+  addAvatar: (val) => "",
+  setAvatar: (val) => {},
 };
 
 export const UserContext = createContext<UserContextType>(defaultState);
@@ -50,6 +59,28 @@ function UserContextProvider({
   const [email, setEmail] = useState(defaultState.email);
   const [avatar, setAvatar] = useState(defaultState.avatar);
   const [tokens, setTokens] = useState(defaultState.tokens);
+
+  const getSelectedAvatar = () => {
+    return (
+      avatar
+        ?.split("/")
+        ?.find((avatar) => avatar[0] === "[")
+        ?.slice(1, -1) || availableAvatars[0]
+    );
+  };
+
+  const getOwnedAvatars = () => {
+    return (
+      avatar
+        ?.split("/")
+        ?.map((avatar) =>
+          avatar[0] === "[" ? avatar?.slice(1, -1) : avatar
+        ) || []
+    );
+  };
+  const addAvatar = (newAvatar: string) => {
+    return avatar.concat("/" + newAvatar).replaceAll("/", "%2F");
+  };
 
   const login = (username: string, password: string, toHome: noop) => {
     axios
@@ -99,6 +130,10 @@ function UserContextProvider({
         login,
         logout,
         setTokens,
+        getSelectedAvatar,
+        getOwnedAvatars,
+        addAvatar,
+        setAvatar,
       }}
     >
       {children}

@@ -13,12 +13,21 @@ import { Row } from "antd";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { UserContext } from "../../context/UserContext";
+import { availableAvatars, getAvatar } from "../../images/Avatars/avatars";
 
 function Shop() {
   const [courses, setCourses] = useState<ItemCardProps[]>([]);
-  const { username, setTokens } = useContext(UserContext);
+  const { id, username, addAvatar, setTokens, getOwnedAvatars, setAvatar } =
+    useContext(UserContext);
 
-  const buyItem = (username: string, tokens: number) => {
+  const updateAvatar = () => {
+    axios
+      .get(`http://localhost:8080/users/avatars?userId=${id}`)
+      .then((res) => setAvatar(res.data))
+      .catch((err) => toast.error(err.message));
+  };
+
+  const buyItem = (username: string, tokens: number, avatar?: string) => {
     axios
       .post("http://localhost:8080/users/tokens/subtract", {
         username,
@@ -26,6 +35,22 @@ function Shop() {
       })
       .then((res) => {
         setTokens(res.data);
+        if (avatar) {
+          axios
+            .put(
+              `http://localhost:8080/users/avatars?userId=${id}&avatar=${addAvatar(
+                avatar
+              )
+                .replaceAll("/", "%2F")
+                .replaceAll("[", "%5B")
+                .replaceAll("]", "%5D")}`
+            )
+            .then((res) => {
+              updateAvatar();
+              toast.success("Avatar added!");
+            })
+            .catch((err) => toast.error(err.message));
+        }
       })
       .catch((err) => toast.error(err.message));
   };
@@ -44,52 +69,65 @@ function Shop() {
       type: "avatar",
       image: leprechaun,
       price: 100,
-      onBuy: () => buyItem(username, 100),
+      onBuy: () => buyItem(username, 100, availableAvatars[1]),
     },
     {
       title: "Man",
       type: "avatar",
       image: man,
       price: 200,
-      onBuy: () => buyItem(username, 200),
+      onBuy: () => buyItem(username, 200, availableAvatars[2]),
     },
     {
       title: "Maya",
       type: "avatar",
       image: maya,
       price: 500,
-      onBuy: () => buyItem(username, 500),
+      onBuy: () => buyItem(username, 500, availableAvatars[3]),
     },
     {
       title: "Maya 2",
       type: "avatar",
       image: maya2,
       price: 1000,
-      onBuy: () => buyItem(username, 1000),
+      onBuy: () => buyItem(username, 1000, availableAvatars[4]),
     },
     {
       title: "Maya 3",
       type: "avatar",
       image: maya3,
       price: 2000,
-      onBuy: () => buyItem(username, 2000),
+      onBuy: () => buyItem(username, 2000, availableAvatars[5]),
     },
     {
       title: "Maya 4",
       type: "avatar",
       image: maya4,
       price: 5000,
-      onBuy: () => buyItem(username, 5000),
+      onBuy: () => buyItem(username, 5000, availableAvatars[6]),
     },
     {
       title: "Woman",
       type: "avatar",
       image: woman,
       price: 10000,
-      onBuy: () => buyItem(username, 10000),
+      onBuy: () => buyItem(username, 10000, availableAvatars[7]),
     },
   ];
 
+  const getAvailableAvatars = () => {
+    return avatars
+      .map((avatar) => ({
+        ...avatar,
+        backendVal: avatar.title.toLowerCase().replaceAll(" ", "-"),
+      }))
+      .filter(
+        (avatar) =>
+          !getOwnedAvatars().find(
+            (availableAvatar) => avatar.backendVal === availableAvatar
+          )
+      );
+  };
   const getCourses = () => {
     axios({
       url: "http://localhost:8080/courses",
@@ -98,7 +136,6 @@ function Shop() {
       .then((res) => {
         setCourses(
           res.data.map((course: any) => {
-            console.log(username);
             return {
               title: course.title,
               type: "course",
@@ -124,7 +161,7 @@ function Shop() {
         justify={"center"}
         className={"max-w-full"}
       >
-        {[review, ...avatars, ...courses].map((item, i) => (
+        {[review, ...getAvailableAvatars(), ...courses].map((item, i) => (
           <ItemCard {...item} key={i} />
         ))}
       </Row>
