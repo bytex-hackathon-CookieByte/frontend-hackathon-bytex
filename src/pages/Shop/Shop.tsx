@@ -14,99 +14,82 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserContext } from "../../context/UserContext";
 
-const buyItem = (username: string, tokens: number) => {
-  console.log({ username, tokens });
-  axios
-    .post("http://localhost:8080/users/tokens/add", {
-      username,
-      tokens,
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => toast.error(err.message));
-};
-
-const review: ItemCardProps = {
-  title: "Profile Review",
-  type: "review",
-  image: checkmark,
-  price: 10000,
-  onBuy: () => {},
-};
-
-const avatars: ItemCardProps[] = [
-  {
-    title: "Leprechaun",
-    type: "avatar",
-    image: leprechaun,
-    price: 100,
-    onBuy: () => {},
-  },
-  {
-    title: "Man",
-    type: "avatar",
-    image: man,
-    price: 200,
-    onBuy: () => {},
-  },
-  {
-    title: "Maya",
-    type: "avatar",
-    image: maya,
-    price: 500,
-    onBuy: () => {},
-  },
-  {
-    title: "Maya 2",
-    type: "avatar",
-    image: maya2,
-    price: 1000,
-    onBuy: () => {},
-  },
-  {
-    title: "Maya 3",
-    type: "avatar",
-    image: maya3,
-    price: 2000,
-    onBuy: () => {},
-  },
-  {
-    title: "Maya 4",
-    type: "avatar",
-    image: maya4,
-    price: 5000,
-    onBuy: () => {},
-  },
-  {
-    title: "Woman",
-    type: "avatar",
-    image: woman,
-    price: 10000,
-    onBuy: () => {},
-  },
-];
-
-// const courses: ItemCardProps[] = [
-//   {
-//     title: "React for begginers",
-//     type: "course",
-//     image: course,
-//     price: 5000,
-//     onBuy: () => {},
-//   },
-//   {
-//     title: "Springboot introduction",
-//     type: "course",
-//     image: course,
-//     price: 5000,
-//     onBuy: () => {},
-//   },
-// ];
-
 function Shop() {
   const [courses, setCourses] = useState<ItemCardProps[]>([]);
-  const { username } = useContext(UserContext);
+  const { username, setTokens } = useContext(UserContext);
+
+  const buyItem = (username: string, tokens: number) => {
+    axios
+      .post("http://localhost:8080/users/tokens/subtract", {
+        username,
+        tokens,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setTokens(0);
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
+  const review: ItemCardProps = {
+    title: "Profile Review",
+    type: "review",
+    image: checkmark,
+    price: 10000,
+    onBuy: () => buyItem(username, 1000),
+  };
+
+  const avatars: ItemCardProps[] = [
+    {
+      title: "Leprechaun",
+      type: "avatar",
+      image: leprechaun,
+      price: 100,
+      onBuy: () => buyItem(username, 100),
+    },
+    {
+      title: "Man",
+      type: "avatar",
+      image: man,
+      price: 200,
+      onBuy: () => buyItem(username, 200),
+    },
+    {
+      title: "Maya",
+      type: "avatar",
+      image: maya,
+      price: 500,
+      onBuy: () => buyItem(username, 500),
+    },
+    {
+      title: "Maya 2",
+      type: "avatar",
+      image: maya2,
+      price: 1000,
+      onBuy: () => buyItem(username, 1000),
+    },
+    {
+      title: "Maya 3",
+      type: "avatar",
+      image: maya3,
+      price: 2000,
+      onBuy: () => buyItem(username, 2000),
+    },
+    {
+      title: "Maya 4",
+      type: "avatar",
+      image: maya4,
+      price: 5000,
+      onBuy: () => buyItem(username, 5000),
+    },
+    {
+      title: "Woman",
+      type: "avatar",
+      image: woman,
+      price: 10000,
+      onBuy: () => buyItem(username, 10000),
+    },
+  ];
 
   const getCourses = () => {
     axios({
@@ -116,6 +99,7 @@ function Shop() {
       .then((res) => {
         setCourses(
           res.data.map((course: any) => {
+            console.log(username);
             return {
               title: course.title,
               type: "course",

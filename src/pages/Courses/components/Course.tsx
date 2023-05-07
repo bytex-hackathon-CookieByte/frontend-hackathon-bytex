@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Button, Card, Col, Modal } from "antd";
+import React, { useContext, useState } from "react";
+import { Button, Card, Col, Input, Modal, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import Meta from "antd/es/card/Meta";
 import course from "../../../images/course.png";
+import { UserContext } from "../../../context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export type CourseType = {
   title: string;
@@ -13,7 +16,20 @@ export type CourseType = {
 };
 
 function Course({ title, content, prize }: CourseType) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { username } = useContext(UserContext);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+
+  const getPrize = () => {
+    axios
+      .post("http://localhost:8080/users/tokens/add", {
+        username,
+        tokens: prize,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => toast.error(err.message));
+  };
 
   return (
     <>
@@ -30,7 +46,7 @@ function Course({ title, content, prize }: CourseType) {
               Prize: {prize || 0}
               <FontAwesomeIcon icon={faCoins} className={"ml-1"} />
             </div>,
-            <Button onClick={() => setIsOpen(true)}>Open</Button>,
+            <Button onClick={() => setIsViewOpen(true)}>Open</Button>,
           ]}
         >
           <Meta
@@ -43,10 +59,16 @@ function Course({ title, content, prize }: CourseType) {
       </Col>
       <Modal
         title={title}
-        open={isOpen}
+        open={isViewOpen}
         closable={false}
         footer={
-          <Button danger onClick={() => setIsOpen(false)}>
+          <Button
+            danger
+            onClick={() => {
+              getPrize();
+              setIsViewOpen(false);
+            }}
+          >
             Finish
           </Button>
         }

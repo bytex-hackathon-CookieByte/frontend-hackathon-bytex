@@ -16,6 +16,7 @@ type UserContextType = {
   tokens: number;
   login: (username: string, password: string, toLogin: noop) => void;
   logout: noop;
+  setTokens: (val: number) => void;
 };
 
 const defaultState: UserContextType = {
@@ -30,6 +31,7 @@ const defaultState: UserContextType = {
   tokens: 500,
   login: () => {},
   logout: () => {},
+  setTokens: () => {},
 };
 
 export const UserContext = createContext<UserContextType>(defaultState);
@@ -57,6 +59,7 @@ function UserContextProvider({
         setIsLoggedIn(true);
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
+        setType(res.data.type);
         setUsername(res.data.username);
         setEmail(res.data.email);
         setAvatar(res.data.avatar);
@@ -95,6 +98,7 @@ function UserContextProvider({
         tokens,
         login,
         logout,
+        setTokens,
       }}
     >
       {children}
