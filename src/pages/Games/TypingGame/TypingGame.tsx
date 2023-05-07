@@ -6,9 +6,9 @@ import { UserContext } from "../../../context/UserContext";
 
 const texts = [
   "Type this text as fast as you can!",
-  // "This is the second text to type.",
-  // "Here comes another text to practice your typing speed.",
-  // "Yet another text to improve your typing skills.",
+  "This is the second text to type.",
+  "Here comes another text to practice your typing speed.",
+  "Yet another text to improve your typing skills.",
 ];
 
 function TypingGame() {
@@ -112,7 +112,7 @@ function TypingGame() {
   useEffect(() => {
     if (gameState === "gameOver") {
       const getPrize = () => {
-        const wonTokens = 0.25 * Math.ceil(calculateAverageScore());
+        const wonTokens = Math.ceil(0.25 * Math.ceil(calculateAverageScore()));
         axios
           .post("http://localhost:8080/users/tokens/add", {
             username,
@@ -131,10 +131,10 @@ function TypingGame() {
   return (
     <div
       className={
-        "text-center h-screen w-100 flex flex-col justify-center items-center"
+        "text-center h-screen w-100 flex flex-col justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500"
       }
     >
-      <Space className={"max-w-[15rem] flex flex-col"}>
+      <Space className={"p-[5rem] flex flex-col bg-white rounded-2xl"}>
         <div className={"font-bold"}>Typing Speed Test</div>
         <div className={""}>{renderValidationText()}</div>
         <Input
@@ -158,6 +158,7 @@ function TypingGame() {
           <div>
             Total Average Score: {calculateAverageScore().toFixed(2)} WPM
             <Button
+              className={"mt-3"}
               onClick={() => {
                 setGameState("waiting");
               }}

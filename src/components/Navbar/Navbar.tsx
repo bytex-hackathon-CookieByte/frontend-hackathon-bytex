@@ -3,10 +3,13 @@ import Sider from "antd/es/layout/Sider";
 import { Divider, Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBrain,
   faBriefcase,
   faGamepad,
   faGraduationCap,
+  faKeyboard,
   faMedal,
+  faQuestion,
   faSackDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -55,11 +58,20 @@ function Navbar() {
           <Menu.Item icon={<FontAwesomeIcon icon={faGraduationCap} />}>
             <Link to={"/courses"}>Courses</Link>
           </Menu.Item>
-          <Menu.Item icon={<FontAwesomeIcon icon={faGamepad} />}>
-            <Menu.SubMenu>
-              <Link to={"/courses"}>Courses</Link>
-            </Menu.SubMenu>
-          </Menu.Item>
+          <Menu.SubMenu
+            icon={<FontAwesomeIcon icon={faGamepad} />}
+            title={"Games"}
+          >
+            <Menu.Item icon={<FontAwesomeIcon icon={faKeyboard} />}>
+              <Link to={"/games/typing"}>Typing</Link>
+            </Menu.Item>
+            <Menu.Item icon={<FontAwesomeIcon icon={faQuestion} />}>
+              <Link to={"/games/guess"}>Guessing</Link>
+            </Menu.Item>
+            <Menu.Item icon={<FontAwesomeIcon icon={faBrain} />}>
+              <Link to={"/games/memory"}>Memory</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
           <Divider />
           <Menu.Item>
             <Link to={`/profile/user/${username}`}>
