@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBrain,
   faBriefcase,
+  faDollarSign,
   faGamepad,
   faGraduationCap,
   faKeyboard,
@@ -52,11 +53,14 @@ function Navbar() {
           <Menu.Item icon={<FontAwesomeIcon icon={faMedal} />}>
             <Link to={"/my-challenges"}>My Challenges</Link>
           </Menu.Item>
+          <Menu.Item icon={<FontAwesomeIcon icon={faGraduationCap} />}>
+            <Link to={"/courses"}>Courses</Link>
+          </Menu.Item>
           <Menu.Item icon={<FontAwesomeIcon icon={faSackDollar} />}>
             <Link to={"/shop"}>Shop</Link>
           </Menu.Item>
-          <Menu.Item icon={<FontAwesomeIcon icon={faGraduationCap} />}>
-            <Link to={"/courses"}>Courses</Link>
+          <Menu.Item icon={<FontAwesomeIcon icon={faDollarSign} />}>
+            <Link to={"/tokens-shop"}>Tokens</Link>
           </Menu.Item>
           <Menu.SubMenu
             icon={<FontAwesomeIcon icon={faGamepad} />}

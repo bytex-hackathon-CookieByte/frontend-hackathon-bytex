@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Card, Col, Input, Modal, Space } from "antd";
+import { Button, Card, Col, Modal } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import Meta from "antd/es/card/Meta";
@@ -16,7 +16,7 @@ export type CourseType = {
 };
 
 function Course({ title, content, prize }: CourseType) {
-  const { username, setTokens } = useContext(UserContext);
+  const { username, setTokens, type } = useContext(UserContext);
   const [isViewOpen, setIsViewOpen] = useState(false);
 
   const getPrize = () => {
@@ -27,6 +27,7 @@ function Course({ title, content, prize }: CourseType) {
       })
       .then((res) => {
         setTokens(res.data);
+        toast.success(prize + " Tokens have been added to your profile!");
       })
       .catch((err) => toast.error(err.message));
   };
@@ -65,7 +66,9 @@ function Course({ title, content, prize }: CourseType) {
           <Button
             danger
             onClick={() => {
-              getPrize();
+              {
+                type === "user" && getPrize();
+              }
               setIsViewOpen(false);
             }}
           >

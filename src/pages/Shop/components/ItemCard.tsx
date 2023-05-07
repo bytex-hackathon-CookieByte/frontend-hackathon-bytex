@@ -2,13 +2,13 @@ import React from "react";
 import { Button, Card, Col } from "antd";
 import Meta from "antd/es/card/Meta";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faCoins, faEuroSign } from "@fortawesome/free-solid-svg-icons";
 
 export type ItemCardProps = {
   title: string;
   image: string;
   price: number;
-  type: "avatar" | "review" | "course";
+  type: "avatar" | "review" | "course" | "tokens";
   onBuy: () => void;
   companyTitle?: string;
 };
@@ -25,9 +25,11 @@ function ItemCard({
     if (type === "avatar") {
       return "User Avatar";
     } else if (type === "review") {
-      return "Other users can review your profile";
+      return "Users can review your profile";
     } else if (type === "course") {
       return `Course by ${companyTitle}`;
+    } else if (type === "tokens") {
+      return "Usefull for buying perks";
     }
     return "Item";
   };
@@ -44,7 +46,10 @@ function ItemCard({
         actions={[
           <div>
             {price}
-            <FontAwesomeIcon icon={faCoins} className={"ml-1"} />
+            <FontAwesomeIcon
+              icon={type === "tokens" ? faEuroSign : faCoins}
+              className={"ml-1"}
+            />
           </div>,
           <Button onClick={onBuy}>Buy</Button>,
         ]}

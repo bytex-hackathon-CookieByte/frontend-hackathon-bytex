@@ -120,7 +120,9 @@ function TypingGame() {
           })
           .then((res) => {
             setTokens(res.data);
-            toast.success(wonTokens + " have been added to your profile!");
+            toast.success(
+              wonTokens + " Tokens have been added to your profile!"
+            );
           })
           .catch((err) => toast.error(err.message));
       };

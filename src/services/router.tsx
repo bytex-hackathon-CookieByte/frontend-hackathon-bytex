@@ -5,7 +5,7 @@ import LoginProtected from "../pages/LoginProtected/LoginProtected";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Challenges from "../pages/Challenges/Challenges";
+// import Challenges from "../pages/Challenges/Challenges";
 import UserProfile from "../pages/Profiles/UserProfile/UserProfile";
 import CompanyProfile from "../pages/Profiles/CompanyProfile/CompanyProfile";
 import Shop from "../pages/Shop/Shop";
@@ -17,6 +17,7 @@ import Battle from "../pages/Challenges/components/Battle";
 import MemoryGame from "../pages/Games/MemoryGame/MemoryGame";
 import TypingGame from "../pages/Games/TypingGame/TypingGame";
 import GuessingGame from "../pages/Games/GuessingGame/GuessingGame";
+import TokenShop from "../pages/TokenShop/TokenShop";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "/battle",
         element: <Battle />,
+      },
+      {
+        path: "/tokens-shop",
+        element: <TokenShop />,
       },
       {
         path: "/games",
