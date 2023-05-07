@@ -18,7 +18,7 @@ function UserProfile() {
         <Badges />
         <ChallengesCard />
         <SkillsCard />
-        <div className={"w-[40rem] flex justify-center my-4"}>
+        <div className={"w-full flex justify-center my-4"}>
           <Button danger onClick={() => logout()}>
             Logout
           </Button>
