@@ -17,8 +17,15 @@ import { availableAvatars, getAvatar } from "../../images/Avatars/avatars";
 
 function Shop() {
   const [courses, setCourses] = useState<ItemCardProps[]>([]);
-  const { id, username, addAvatar, setTokens, getOwnedAvatars, setAvatar } =
-    useContext(UserContext);
+  const {
+    id,
+    username,
+    addAvatar,
+    setTokens,
+    getOwnedAvatars,
+    setAvatar,
+    tokens,
+  } = useContext(UserContext);
 
   const updateAvatar = () => {
     axios
@@ -27,11 +34,16 @@ function Shop() {
       .catch((err) => toast.error(err.message));
   };
 
-  const buyItem = (username: string, tokens: number, avatar?: string) => {
+  const buyItem = (username: string, price: number, avatar?: string) => {
+    if (tokens < price) {
+      toast.error(`Not enought tokens, buy some from the Token Shop`);
+      return;
+    }
+
     axios
       .post("http://localhost:8080/users/tokens/subtract", {
         username,
-        tokens,
+        price: tokens,
       })
       .then((res) => {
         setTokens(res.data);
