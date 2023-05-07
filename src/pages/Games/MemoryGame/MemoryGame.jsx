@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useState, useContext } from "react";
+import { Button } from "antd";
 import "./MemoryGame.css";
 import SingleCard from "./subcomponents/SingleCard";
+import axios from "axios";
+import { UserContext } from "../../../context/UserContext";
+import { toast } from "react-toastify";
 
 const cardImages = [
-  { src: "/img/stone.png", matched: false },
-  { src: "/img/gold.png", matched: false },
-  { src: "/img/rubik.jpg", matched: false },
-  { src: "/img/woods.png", matched: false },
-  { src: "/img/jackpot.png", matched: false },
-  { src: "/img/trophy.png", matched: false },
-  { src: "/img/coins.png", matched: false },
-  { src: "/img/coins.png", matched: false },
+  { src: "/img/maya-2.png", matched: false },
+  { src: "/img/leprechaun.png", matched: false },
+  { src: "/img/leprechaun.png", matched: false },
+  { src: "/img/maya-2.png", matched: false },
+  { src: "/img/maya-3.png", matched: false },
+  { src: "/img/maya-4.png", matched: false },
+  { src: "/img/maya.png", matched: false },
+  { src: "/img/maya.png", matched: false },
 ];
 
 function MemoryGame() {
+  const [isFinished, setIsFinished] = useState(false);
+  const { username, setTokens } = useContext(UserContext);
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
@@ -30,6 +35,28 @@ function MemoryGame() {
     setCards(suffledCards);
     setTurns(0);
   };
+
+  console.log("KARDS", cards);
+
+  const checkMatch = () => {
+    cards.forEach((card) => {
+      if (card.matched === false) {
+        setIsFinished(false);
+      }
+    });
+    setIsFinished(true);
+  };
+
+  useEffect(() => {
+    checkMatch();
+  }, [cards]);
+
+  useEffect(() => {
+    if (isFinished === true) {
+      console.log("Game is finished");
+      getPrize();
+    }
+  }, [isFinished]);
 
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
@@ -65,10 +92,25 @@ function MemoryGame() {
     setTurns((prevTurns) => prevTurns + 1);
     setDisabled(false);
   };
+
+  const getPrize = () => {
+    const wonTokens = Math.ceil(0.5 * (100 - turns));
+    axios
+      .post("http://localhost:8080/users/tokens/add", {
+        username,
+        tokens: wonTokens,
+      })
+      .then((res) => {
+        setTokens(res.data);
+        toast.success(wonTokens + " have been added to your profile!");
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
   return (
-    <div className="memory-container">
+    <div className="flex justify-center items-center flex-col overflow-hidden">
       <h1>Memory game</h1>
-      <button onClick={suffleCards}>New Game</button>
+      <Button onClick={suffleCards}>New Game</Button>
       <div className="card-grid">
         {cards.map((card) => (
           <SingleCard
