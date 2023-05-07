@@ -16,6 +16,7 @@ import Stages from "../pages/Challenges/components/Stages";
 import Battle from "../pages/Challenges/components/Battle";
 import MemoryGame from "../pages/Games/MemoryGame/MemoryGame";
 import TypingGame from "../pages/Games/TypingGame/TypingGame";
+import GuessingGame from "../pages/Games/GuessingGame/GuessingGame";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "memory", element: <MemoryGame /> },
           { path: "typing", element: <TypingGame /> },
+          { path: "guess", element: <GuessingGame /> },
         ],
       },
     ],
