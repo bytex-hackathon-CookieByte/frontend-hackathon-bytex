@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import { Button } from "antd";
 import "./MemoryGame.css";
 import SingleCard from "./subcomponents/SingleCard";
 
 const cardImages = [
-  { src: "/img/stone.png", matched: false },
-  { src: "/img/gold.png", matched: false },
-  { src: "/img/rubik.jpg", matched: false },
-  { src: "/img/woods.png", matched: false },
-  { src: "/img/jackpot.png", matched: false },
-  { src: "/img/trophy.png", matched: false },
-  { src: "/img/coins.png", matched: false },
-  { src: "/img/coins.png", matched: false },
+  { src: "/img/maya-2.png", matched: false },
+  { src: "/img/leprechaun.png", matched: false },
+  { src: "/img/leprechaun.png", matched: false },
+  { src: "/img/maya-2.png", matched: false },
+  { src: "/img/maya-3.png", matched: false },
+  { src: "/img/maya-4.png", matched: false },
+  { src: "/img/maya.png", matched: false },
+  { src: "/img/maya.png", matched: false },
 ];
 
 function MemoryGame() {
@@ -66,9 +66,9 @@ function MemoryGame() {
     setDisabled(false);
   };
   return (
-    <div className="memory-container">
+    <div className="flex justify-center items-center flex-col overflow-hidden">
       <h1>Memory game</h1>
-      <button onClick={suffleCards}>New Game</button>
+      <Button onClick={suffleCards}>New Game</Button>
       <div className="card-grid">
         {cards.map((card) => (
           <SingleCard

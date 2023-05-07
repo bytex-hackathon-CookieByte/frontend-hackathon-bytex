@@ -1,15 +1,14 @@
 .memory-container {
   font-size: 1.5em;
   text-align: center;
-  background: #58545e;
   color: #fff;
   width: 100%;
   margin: 15px auto;
 }
 
 .card-grid {
-  padding-left: 60px;
+  margin-left: 8rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 8px;
 }
