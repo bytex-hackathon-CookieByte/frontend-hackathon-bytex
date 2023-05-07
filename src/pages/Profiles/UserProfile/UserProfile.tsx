@@ -12,7 +12,7 @@ function UserProfile() {
   const { logout } = useContext(UserContext);
 
   return (
-    <div>
+    <div className="max-w-100">
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify={"center"}>
         <UserInfo userId={userId} />
         <Badges />
