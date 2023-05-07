@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Modal, Input, Form } from "antd";
 import axios from "axios";
+import { UserContext } from "../../../context/UserContext";
+import { toast } from "react-toastify";
 
 export default function AddChallenge(props: { fetchChallenges: () => void }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
+
+  const { id, type } = useContext(UserContext);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -23,7 +27,7 @@ export default function AddChallenge(props: { fetchChallenges: () => void }) {
   const handleAddChallenge = () => {
     if (title && description) {
       const challengeData = {
-        companyId: "8b2e06db-9ceb-4fdb-89e1-95f94738a438",
+        companyId: id,
         title: title,
         description: description,
         price: 700,
@@ -45,16 +49,18 @@ export default function AddChallenge(props: { fetchChallenges: () => void }) {
           props.fetchChallenges();
         })
         .catch((error) => {
-          console.error(error);
+          toast.error(error.message);
         });
     }
   };
 
   return (
     <>
-      <div className="m-4">
-        <Button onClick={showModal}>Add Challenge</Button>
-      </div>
+      {type === "company" && (
+        <div className="m-4">
+          <Button onClick={showModal}>Add Challenge</Button>
+        </div>
+      )}
       <Modal
         title="Add Challenge"
         open={isModalOpen}

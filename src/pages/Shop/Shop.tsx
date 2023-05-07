@@ -25,8 +25,7 @@ function Shop() {
         tokens,
       })
       .then((res) => {
-        console.log(res.data);
-        setTokens(0);
+        setTokens(res.data);
       })
       .catch((err) => toast.error(err.message));
   };

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Avatar } from "antd";
 import buddy from "../../../images/Avatars/buddy.png";
+import { UserContext } from "../../../context/UserContext";
 
 export default function UserInfo(props: { userId: string | undefined }) {
   const avatar = buddy;
