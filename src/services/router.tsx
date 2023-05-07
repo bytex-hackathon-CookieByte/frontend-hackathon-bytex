@@ -12,6 +12,8 @@ import Shop from "../pages/Shop/Shop";
 import MyChallenges from "../pages/MyChallenges/MyChallenges";
 import Courses from "../pages/Courses/Courses";
 import CompanyChallenges from "../pages/Challenges/CompanyChallenges";
+import MemoryGame from "../pages/Games/MemoryGame/MemoryGame";
+import TypingGame from "../pages/Games/TypingGame/TypingGame";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +62,13 @@ export const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/games",
+        children: [
+          { path: "memory", element: <MemoryGame /> },
+          { path: "typing", element: <TypingGame /> },
+        ],
       },
     ],
   },

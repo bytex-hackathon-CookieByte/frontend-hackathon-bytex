@@ -16,7 +16,7 @@ export type CourseType = {
 };
 
 function Course({ title, content, prize }: CourseType) {
-  const { username } = useContext(UserContext);
+  const { username, setTokens } = useContext(UserContext);
   const [isViewOpen, setIsViewOpen] = useState(false);
 
   const getPrize = () => {
@@ -26,7 +26,7 @@ function Course({ title, content, prize }: CourseType) {
         tokens: prize,
       })
       .then((res) => {
-        console.log(res.data);
+        setTokens(res.data);
       })
       .catch((err) => toast.error(err.message));
   };
