@@ -18,8 +18,8 @@ const cardImages = [
 ];
 
 function MemoryGame() {
+  const { username, setTokens, type } = useContext(UserContext);
   const [isFinished, setIsFinished] = useState(false);
-  const { username, setTokens } = useContext(UserContext);
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
@@ -36,7 +36,7 @@ function MemoryGame() {
     setTurns(0);
   };
 
-  console.log("KARDS", cards);
+  // console.log("KARDS", cards);
 
   const checkMatch = () => {
     cards.forEach((card) => {
@@ -96,10 +96,15 @@ function MemoryGame() {
   const getPrize = () => {
     const wonTokens = Math.ceil(0.5 * (100 - turns));
     axios
-      .post("http://localhost:8080/users/tokens/add", {
-        username,
-        tokens: wonTokens,
-      })
+      .post(
+        `http://localhost:8080/${
+          type === "user" ? "users" : "companies"
+        }/tokens/add`,
+        {
+          username,
+          tokens: wonTokens,
+        }
+      )
       .then((res) => {
         setTokens(res.data);
         toast.success(wonTokens + " have been added to your profile!");

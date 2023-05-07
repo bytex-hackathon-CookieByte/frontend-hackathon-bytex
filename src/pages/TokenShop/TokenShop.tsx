@@ -10,14 +10,19 @@ import { UserContext } from "../../context/UserContext";
 import { toast } from "react-toastify";
 
 function TokenShop() {
-  const { username, setTokens } = useContext(UserContext);
+  const { username, setTokens, type } = useContext(UserContext);
 
   const getTokens = (prize: string) => {
     axios
-      .post("http://localhost:8080/users/tokens/add", {
-        username,
-        tokens: prize,
-      })
+      .post(
+        `http://localhost:8080/${
+          type === "user" ? "users" : "companies"
+        }/tokens/add`,
+        {
+          username,
+          tokens: prize,
+        }
+      )
       .then((res) => {
         setTokens(res.data);
         toast.success(prize + " Tokens have been added to your profile!");

@@ -83,26 +83,28 @@ function UserContextProvider({
   };
 
   const login = (username: string, password: string, toHome: noop) => {
-    axios
-      .post("http://localhost:8080/login", { username, password })
-      .then((res) => {
-        console.log(res.data);
-        setIsLoggedIn(true);
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        setType(res.data.type);
-        setUsername(res.data.username);
-        setEmail(res.data.email);
-        setAvatar(res.data.avatar);
-        setId(res.data.id);
-        setFirstname(res.data.firstName);
-        setLastName(res.data.lastName);
-        setTokens(res.data.tokens);
-        toHome();
-      })
-      .catch((err) => {
-        toast.error(err?.response?.data || err.message);
-      });
+    username &&
+      password &&
+      axios
+        .post("http://localhost:8080/login", { username, password })
+        .then((res) => {
+          // console.log(res.data);
+          setIsLoggedIn(true);
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
+          setType(res.data.type);
+          setUsername(res.data.username);
+          setEmail(res.data.email);
+          setAvatar(res.data.avatar);
+          setId(res.data.id);
+          setFirstname(res.data.firstName);
+          setLastName(res.data.lastName);
+          setTokens(res.data.tokens);
+          toHome();
+        })
+        .catch((err) => {
+          toast.error(err?.response?.data || err.message);
+        });
   };
 
   const logout = () => {

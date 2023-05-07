@@ -12,7 +12,7 @@ const texts = [
 ];
 
 function TypingGame() {
-  const { username, setTokens } = useContext(UserContext);
+  const { username, setTokens, type } = useContext(UserContext);
 
   const [gameState, setGameState] = useState<
     "waiting" | "started" | "finished" | "gameOver"
@@ -114,10 +114,15 @@ function TypingGame() {
       const getPrize = () => {
         const wonTokens = Math.ceil(0.25 * Math.ceil(calculateAverageScore()));
         axios
-          .post("http://localhost:8080/users/tokens/add", {
-            username,
-            tokens: wonTokens,
-          })
+          .post(
+            `http://localhost:8080/${
+              type === "user" ? "users" : "companies"
+            }/tokens/add`,
+            {
+              username,
+              tokens: wonTokens,
+            }
+          )
           .then((res) => {
             setTokens(res.data);
             toast.success(
@@ -157,8 +162,10 @@ function TypingGame() {
           </div>
         )}
         {gameState === "gameOver" && (
-          <div>
-            Total Average Score: {calculateAverageScore().toFixed(2)} WPM
+          <Space direction={"vertical"}>
+            <div>
+              Total Average Score: {calculateAverageScore().toFixed(2)} WPM
+            </div>
             <Button
               className={"mt-3"}
               onClick={() => {
@@ -167,7 +174,7 @@ function TypingGame() {
             >
               Play again!
             </Button>
-          </div>
+          </Space>
         )}
       </Space>
     </div>

@@ -25,6 +25,7 @@ function Shop() {
     getOwnedAvatars,
     setAvatar,
     tokens,
+    type,
   } = useContext(UserContext);
 
   const updateAvatar = () => {
@@ -41,10 +42,15 @@ function Shop() {
     }
 
     axios
-      .post("http://localhost:8080/users/tokens/subtract", {
-        username,
-        price: tokens,
-      })
+      .post(
+        `http://localhost:8080/${
+          type === "user" ? "users" : "companies"
+        }/tokens/subtract`,
+        {
+          username,
+          price: tokens,
+        }
+      )
       .then((res) => {
         setTokens(res.data);
         if (avatar) {
