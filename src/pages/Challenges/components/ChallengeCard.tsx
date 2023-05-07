@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Avatar, Button, Card } from "antd";
 import { Col } from "antd";
+import DeleteChallenge from "./DeleteChallenge";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -22,7 +24,15 @@ export default function ChallengeCard(props: {
         cover={<img alt="example" src={props.imgSrc} />}
         actions={[
           <>
-            <Button>Accept Challenge</Button>
+            <Button>
+              {" "}
+              <Link to="/battle">Accept Challenge</Link>
+            </Button>
+            <Button>
+              <Link to="/challenges/asfasf/stages">View</Link>
+            </Button>
+            {/* <Button>Delete Challenge</Button> */}
+            {/* <DeleteChallenge /> */}
           </>,
         ]}
       >

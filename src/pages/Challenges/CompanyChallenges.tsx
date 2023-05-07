@@ -5,7 +5,7 @@ import { Row, Button } from "antd";
 import axios from "axios";
 import AddChallenge from "./components/AddChallenge";
 
-function Challenges() {
+export default function CompanyChallenges() {
   const [challenges, setChallenges] = useState<any>([]);
 
   const fetchChallenges = () => {
@@ -45,5 +45,3 @@ function Challenges() {
     </>
   );
 }
-
-export default Challenges;
