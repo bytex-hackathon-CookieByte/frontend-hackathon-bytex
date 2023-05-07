@@ -9,15 +9,18 @@ import { UserContext } from "../../../context/UserContext";
 
 function UserProfile() {
   const { userId } = useParams();
-  const { logout } = useContext(UserContext);
+  const { logout, type } = useContext(UserContext);
 
   return (
-    <div>
+    <div className="max-w-100">
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify={"center"}>
-        <UserInfo userId={userId} />
-        <Badges />
-        <ChallengesCard />
-        <SkillsCard />
+        <>
+          <UserInfo userId={userId} />
+          <Badges />
+          <ChallengesCard />
+          <SkillsCard />
+        </>
+
         <div className={"w-full flex justify-center my-4"}>
           <Button danger onClick={() => logout()}>
             Logout

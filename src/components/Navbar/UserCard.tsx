@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Avatar, Space } from "antd";
-import buddy from "../../images/Avatars/buddy.png";
 import { UserContext } from "../../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { getAvatar } from "../../images/Avatars/avatars";
 
 type UserCardProps = {
   className?: string;
@@ -11,13 +11,12 @@ type UserCardProps = {
 };
 
 function UserCard({ isCollapsed, className }: UserCardProps) {
-  const { username, avatar, tokens } = useContext(UserContext);
-  console.log(username);
+  const { username, getSelectedAvatar, tokens } = useContext(UserContext);
   return (
     <div className={`${className}`}>
       <div className={!isCollapsed ? "flex items-center align-top" : ""}>
         <Avatar
-          src={avatar || buddy}
+          src={getAvatar(getSelectedAvatar())}
           className={isCollapsed ? "mx-[-50%]" : ""}
         />
         {!isCollapsed && (

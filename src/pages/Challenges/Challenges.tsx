@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ChallengeCard from "./components/ChallengeCard";
 import bytex_cover from "../../images/bytex-cover.png";
 import { Row } from "antd";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
-function Challenges() {
+function Challenges(props: { buttonText: string }) {
   const [challenges, setChallenges] = useState<any>([]);
 
   const fetchChallenges = () => {
