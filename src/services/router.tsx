@@ -12,6 +12,8 @@ import Shop from "../pages/Shop/Shop";
 import MyChallenges from "../pages/MyChallenges/MyChallenges";
 import Courses from "../pages/Courses/Courses";
 import CompanyChallenges from "../pages/Challenges/CompanyChallenges";
+import Stages from "../pages/Challenges/components/Stages";
+import Battle from "../pages/Challenges/components/Battle";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/challenges/:challengeId/stages",
+        element: <Stages />,
+      },
+      {
+        path: "/battle",
+        element: <Battle />,
       },
     ],
   },

@@ -23,7 +23,7 @@ export default function AddChallenge(props: { fetchChallenges: () => void }) {
   const handleAddChallenge = () => {
     if (title && description) {
       const challengeData = {
-        companyId: "41fe7ae8-530b-40f3-9273-e5500fddbd4c",
+        companyId: "8b2e06db-9ceb-4fdb-89e1-95f94738a438",
         title: title,
         description: description,
         price: 700,
