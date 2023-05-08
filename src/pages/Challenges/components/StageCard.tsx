@@ -15,12 +15,12 @@ export default function StageCard(props: {
   return (
     <Col className="gutter-row mt-5">
       <Card
-        className="m-4"
+        className="m-4 mt-10"
         style={{ width: 400, height: 120 }}
         actions={[
           <>
             <QuestionsModal />
-            <Leaderboard />,
+            <Leaderboard />
           </>,
         ]}
       >

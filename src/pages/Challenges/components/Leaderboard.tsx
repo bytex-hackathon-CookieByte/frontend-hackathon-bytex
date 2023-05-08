@@ -19,7 +19,9 @@ export default function Leaderboard() {
   };
   return (
     <>
-      <Button onClick={showModal}>Leaderboard</Button>
+      <Button className={"ml-2"} onClick={showModal}>
+        Leaderboard
+      </Button>
       <Modal
         title="Leaderboard"
         open={isModalOpen}

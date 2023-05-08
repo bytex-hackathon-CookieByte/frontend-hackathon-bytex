@@ -9,14 +9,21 @@ export default function Stages() {
 
   const fetchStages = () => {
     axios({
-      url: "http://localhost:8080/challenges/stages?challengeId=608927ea-3984-4c4c-bb10-9b551a74c915",
+      url: "http://localhost:8080/challenges",
       method: "GET",
-    })
-      .then((res) => {
-        console.log(res.data);
-        setStages(res.data);
+    }).then((res) => {
+      axios({
+        url: `http://localhost:8080/challenges/stages?challengeId=${
+          res.data[0]?.id || ""
+        }`,
+        method: "GET",
       })
-      .catch((err) => {});
+        .then((res) => {
+          console.log(res.data);
+          setStages(res.data);
+        })
+        .catch((err) => {});
+    });
   };
 
   useEffect(() => {

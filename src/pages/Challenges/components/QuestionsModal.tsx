@@ -5,7 +5,7 @@ import axios from "axios";
 import Leaderboard from "./Leaderboard";
 
 export default function QuestionsModal() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [questions, setQuestions] = useState<any>([]);
   const [value, setValue] = useState(1);
 
@@ -28,7 +28,7 @@ export default function QuestionsModal() {
 
   const fetchAllQuestions = () => {
     axios({
-      url: "http://localhost:8080/challenges/stages/questions/search?stageId=f9d46346-7e27-40de-a1a2-e9fdc60b653a",
+      url: "http://localhost:8080/challenges/stages/questions",
       method: "GET",
     })
       .then((res) => {
@@ -59,23 +59,38 @@ export default function QuestionsModal() {
             {question.quiz1 === undefined ? (
               <Input placeholder="Write your answer"></Input>
             ) : (
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1}>{question.quiz1}</Radio>
-                <Radio value={2}>{question.quiz2}</Radio>
-                <Radio value={3}>{question.quiz3}</Radio>
-                <Radio value={4}>{question.quiz4}</Radio>
+              <Radio.Group
+                onChange={onChange}
+                value={value}
+                className={"flex flex-col"}
+              >
+                <Radio className={"my-2"} value={1}>
+                  {question.quiz1}
+                </Radio>
+                <Radio className={"my-1"} value={2}>
+                  {question.quiz2}
+                </Radio>
+                <Radio className={"my-1"} value={3}>
+                  {question.quiz3}
+                </Radio>
+                <Radio className={"my-1"} value={4}>
+                  {question.quiz4}
+                </Radio>
               </Radio.Group>
             )}
           </>
         ))}
-        <Button
-          onClick={() => {
-            setIsModalOpen(false);
-          }}
-        >
-          Submit
-        </Button>
-        <Leaderboard />
+        <div className={"mt-3"}>
+          <Button
+            className={"mr-2"}
+            onClick={() => {
+              setIsModalOpen(false);
+            }}
+          >
+            Submit
+          </Button>
+          <Leaderboard />
+        </div>
       </Modal>
     </>
   );

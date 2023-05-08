@@ -9,22 +9,22 @@ export default function ChallengesCard() {
       </div>
       <div className="flex flex-col justify-center px-4 py-6">
         {/* <h1 className="text-3xl font-bold opacity-90 mb-2">{props.userId}</h1> */}
-        <h1 className="text-3xl font-bold opacity-90 mb-4">Challanges</h1>
+        <h1 className="text-3xl font-bold opacity-90 mb-4">Challenges</h1>
         <div className="mb-2">
           <h1 className="text-md font-bold opacity-70">
-            Bytex Frontend Challange
+            Bytex Frontend Challenge
           </h1>
           <p className="">description 1</p>
         </div>
         <div className="mb-2">
           <h1 className="text-md font-bold opacity-70">
-            Bytex Backend Challange
+            Bytex Backend Challenge
           </h1>
           <p className="">description 2</p>
         </div>
         <div className="mb-2">
           <h1 className="text-md font-bold opacity-70">
-            Bytex Testing Challange
+            Bytex Testing Challenge
           </h1>
           <p className="">description 3</p>
         </div>
